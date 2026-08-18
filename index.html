@@ -39,12 +39,21 @@
         :root[data-theme="sakura"] { --bg-dark: #140810; --card-bg: rgba(38, 18, 31, 0.7); --primary-glow: #f43f5e; --primary-light: #fda4af; --border-glow: rgba(253, 164, 175, 0.35); --particle-rgb: 253, 164, 175; }
         :root[data-theme="obsidian"] { --bg-dark: #0a0a0a; --card-bg: rgba(26, 26, 26, 0.7); --primary-glow: #e2e8f0; --primary-light: #ffffff; --border-glow: rgba(255, 255, 255, 0.35); --particle-rgb: 255, 255, 255; }
 
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+
         body {
             background-color: var(--bg-dark);
-            min-height: 100vh; min-height: -webkit-fill-available;
-            display: flex; justify-content: center; align-items: center;
-            overflow-x: hidden; position: relative; color: var(--text-main);
-            padding: 16px; transition: background-color 0.6s var(--ease-out);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            color: var(--text-main);
+            padding: 16px;
+            transition: background-color 0.6s var(--ease-out);
         }
 
         #particleCanvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1; pointer-events: none; }
@@ -56,14 +65,13 @@
             border: 1px solid var(--border-glow); border-radius: clamp(20px, 6vw, 32px);
             padding: clamp(20px, 5vw, 32px);
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75), 0 0 30px -5px var(--border-glow);
-            animation: cardAppear 1s var(--ease-spring) forwards, cardFloat 8s ease-in-out infinite alternate 1s;
+            animation: cardAppear 0.8s var(--ease-spring) forwards;
             transition: background 0.6s var(--ease-out), border-color 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out);
         }
 
-        @keyframes cardAppear { 0% { opacity: 0; transform: scale(0.85) translateY(30px); } 100% { opacity: 1; transform: scale(1) translateY(0px); } }
-        @keyframes cardFloat { 0% { transform: translateY(0px); } 100% { transform: translateY(-8px); } }
+        /* Xuất hiện xong đứng yên cố định */
+        @keyframes cardAppear { 0% { opacity: 0; transform: scale(0.9); } 100% { opacity: 1; transform: scale(1); } }
 
-        /* DÒNG CHÚ THÍCH PHÍA TRÊN */
         .top-sub-note {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -115,8 +123,8 @@
 
         .theme-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(16px); z-index: 100; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: all 0.4s var(--ease-out); padding: 16px; }
         .theme-modal.active { opacity: 1; pointer-events: auto; }
-        .theme-grid-card { background: #0f172a; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: clamp(20px, 5vw, 28px); width: min(100%, 420px); max-height: 85vh; overflow-y: auto; padding: clamp(18px, 4vw, 24px); transform: scale(0.85) translateY(20px); transition: transform 0.4s var(--ease-spring); }
-        .theme-modal.active .theme-grid-card { transform: scale(1) translateY(0); }
+        .theme-grid-card { background: #0f172a; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: clamp(20px, 5vw, 28px); width: min(100%, 420px); max-height: 85vh; overflow-y: auto; padding: clamp(18px, 4vw, 24px); transform: scale(0.85); transition: transform 0.4s var(--ease-spring); }
+        .theme-modal.active .theme-grid-card { transform: scale(1); }
         .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
         .modal-title { font-size: clamp(0.95rem, 3vw, 1.1rem); font-weight: 800; display: flex; align-items: center; gap: 8px; }
         .close-btn { background: rgba(255,255,255,0.1); border: none; color: #fff; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s var(--ease-spring); }
@@ -146,7 +154,6 @@
     <canvas id="particleCanvas"></canvas>
 
     <div class="dashboard-container">
-        <!-- DÒNG CHÚ THÍCH TRÊN CÙNG -->
         <div class="top-sub-note">
             <i class="fa-solid fa-circle-info"></i>
             <span id="subNoteText">Đang tải chú thích hệ thống...</span>
@@ -207,9 +214,6 @@
     </div>
 
     <script>
-        // ==========================================
-        // 1. TỰ ĐỘNG LƯU VÀ TẢI THEME TỪ LOCALSTORAGE
-        // ==========================================
         const themeModal = document.getElementById('themeModal');
         document.getElementById('openThemeModal').onclick = () => themeModal.classList.add('active');
         document.getElementById('closeThemeModal').onclick = () => themeModal.classList.remove('active');
@@ -217,15 +221,11 @@
         function setTheme(themeKey, themeName) {
             document.documentElement.setAttribute('data-theme', themeKey);
             document.getElementById('currentThemeLabel').textContent = themeName;
-            
-            // Lưu vào bộ nhớ máy người dùng
             localStorage.setItem('user_saved_theme_key', themeKey);
             localStorage.setItem('user_saved_theme_name', themeName);
-            
             themeModal.classList.remove('active');
         }
 
-        // Đọc dữ liệu khi vừa mở trang Web
         (function loadSavedTheme() {
             const savedKey = localStorage.getItem('user_saved_theme_key') || 'emerald';
             const savedName = localStorage.getItem('user_saved_theme_name') || 'Emerald';
@@ -233,9 +233,6 @@
             document.getElementById('currentThemeLabel').textContent = savedName;
         })();
 
-        // ==========================================
-        // 2. FETCH DATA NPOINT (TỰ ĐỘNG LẤY CHÚ THÍCH)
-        // ==========================================
         const NPOINT_API_URL = 'https://api.npoint.io/db97bcdc9bb0181fe3ee';
 
         async function checkBanwaveAPI() {
@@ -295,9 +292,6 @@
         checkBanwaveAPI();
         setInterval(checkBanwaveAPI, 2500);
 
-        // ==========================================
-        // 3. BẢO VỆ CHỐNG SOI ELEMENT
-        // ==========================================
         const warningEl = document.getElementById('securityWarning');
         let tempKeyTimer = null, isDevToolsOpened = false;
 
@@ -343,9 +337,6 @@
             }
         }, 500);
 
-        // ==========================================
-        // 4. ĐỒNG HỒ TỰ ĐỘNG REALTIME 60FPS
-        // ==========================================
         function updateVietnamTime() {
             const now = new Date();
             const optionsDate = { timeZone: 'Asia/Ho_Chi_Minh', weekday: 'long', year: 'numeric', month: '2-digit', day: '2-digit' };
@@ -357,9 +348,6 @@
         }
         requestAnimationFrame(updateVietnamTime);
 
-        // ==========================================
-        // 5. CANVAS HẠT HẬU CẢNH GPU
-        // ==========================================
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
         let width, height, particles = [];
