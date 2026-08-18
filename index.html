@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" data-theme="emerald">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,124 +8,127 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+        /* 12 THEMES BẮT MẮT CỰC NỔI BẬT */
+        :root[data-theme="emerald"] {
+            --bg-dark: #030712; --card-bg: rgba(15, 23, 42, 0.65);
+            --primary-glow: #10b981; --primary-light: #34d399;
+            --border-glow: rgba(52, 211, 153, 0.3); --particle-rgb: 52, 211, 153;
+        }
+        :root[data-theme="cyberpunk"] {
+            --bg-dark: #090014; --card-bg: rgba(24, 9, 43, 0.7);
+            --primary-glow: #ff007f; --primary-light: #00f0ff;
+            --border-glow: rgba(0, 240, 255, 0.4); --particle-rgb: 0, 240, 255;
+        }
+        :root[data-theme="amethyst"] {
+            --bg-dark: #0d0714; --card-bg: rgba(27, 18, 43, 0.7);
+            --primary-glow: #a855f7; --primary-light: #c084fc;
+            --border-glow: rgba(192, 132, 252, 0.3); --particle-rgb: 192, 132, 252;
+        }
+        :root[data-theme="sunset"] {
+            --bg-dark: #120504; --card-bg: rgba(36, 14, 12, 0.7);
+            --primary-glow: #f97316; --primary-light: #fb923c;
+            --border-glow: rgba(251, 146, 60, 0.3); --particle-rgb: 251, 146, 60;
+        }
+        :root[data-theme="ocean"] {
+            --bg-dark: #020d1a; --card-bg: rgba(10, 28, 51, 0.7);
+            --primary-glow: #0284c7; --primary-light: #38bdf8;
+            --border-glow: rgba(56, 189, 248, 0.3); --particle-rgb: 56, 189, 248;
+        }
+        :root[data-theme="crimson"] {
+            --bg-dark: #140305; --card-bg: rgba(41, 10, 16, 0.7);
+            --primary-glow: #e11d48; --primary-light: #fb7185;
+            --border-glow: rgba(251, 113, 133, 0.3); --particle-rgb: 251, 113, 133;
+        }
+        :root[data-theme="gold"] {
+            --bg-dark: #120d02; --card-bg: rgba(38, 28, 8, 0.7);
+            --primary-glow: #eab308; --primary-light: #fde047;
+            --border-glow: rgba(253, 224, 71, 0.3); --particle-rgb: 253, 224, 71;
+        }
+        :root[data-theme="vaporwave"] {
+            --bg-dark: #10061e; --card-bg: rgba(30, 14, 54, 0.7);
+            --primary-glow: #ec4899; --primary-light: #f472b6;
+            --border-glow: rgba(244, 114, 182, 0.3); --particle-rgb: 244, 114, 182;
+        }
+        :root[data-theme="matrix"] {
+            --bg-dark: #020f04; --card-bg: rgba(8, 33, 13, 0.7);
+            --primary-glow: #22c55e; --primary-light: #4ade80;
+            --border-glow: rgba(74, 222, 128, 0.3); --particle-rgb: 74, 222, 128;
+        }
+        :root[data-theme="aurora"] {
+            --bg-dark: #040f17; --card-bg: rgba(12, 34, 48, 0.7);
+            --primary-glow: #14b8a6; --primary-light: #2dd4bf;
+            --border-glow: rgba(45, 212, 191, 0.3); --particle-rgb: 45, 212, 191;
+        }
+        :root[data-theme="sakura"] {
+            --bg-dark: #140810; --card-bg: rgba(38, 18, 31, 0.7);
+            --primary-glow: #f43f5e; --primary-light: #fda4af;
+            --border-glow: rgba(253, 164, 175, 0.3); --particle-rgb: 253, 164, 175;
+        }
+        :root[data-theme="obsidian"] {
+            --bg-dark: #0a0a0a; --card-bg: rgba(26, 26, 26, 0.7);
+            --primary-glow: #e2e8f0; --primary-light: #ffffff;
+            --border-glow: rgba(255, 255, 255, 0.3); --particle-rgb: 255, 255, 255;
+        }
+
         :root {
-            --bg-dark: #030712;
-            --card-bg: rgba(15, 23, 42, 0.65);
-            --border-glow: rgba(52, 211, 153, 0.25);
-            --green-glow: #10b981;
-            --green-light: #34d399;
             --text-main: #f8fafc;
             --text-sub: #94a3b8;
         }
 
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            margin: 0; padding: 0; box-sizing: border-box;
             font-family: 'Plus Jakarta Sans', sans-serif;
             -webkit-font-smoothing: antialiased;
+            transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
         }
 
         body {
             background-color: var(--bg-dark);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
+            display: flex; justify-content: center; align-items: center;
+            overflow: hidden; position: relative;
             color: var(--text-main);
         }
 
         #particleCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 1;
-            pointer-events: none;
-            will-change: transform;
+            position: fixed; top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: 1; pointer-events: none;
         }
 
         .dashboard-container {
-            position: relative;
-            z-index: 10;
-            width: 90%;
-            max-width: 460px;
+            position: relative; z-index: 10;
+            width: 90%; max-width: 480px;
             background: var(--card-bg);
             backdrop-filter: blur(25px) saturate(180%);
             -webkit-backdrop-filter: blur(25px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 32px;
-            padding: 32px 28px;
-            box-shadow: 
-                0 30px 60px -12px rgba(0, 0, 0, 0.7),
-                0 0 40px -10px rgba(16, 185, 129, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.15);
-            transform: translateZ(0);
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+            border: 1px solid var(--border-glow);
+            border-radius: 32px; padding: 32px 28px;
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.8), 0 0 40px -10px var(--border-glow);
             animation: cardFloat 6s ease-in-out infinite alternate;
         }
 
-        .dashboard-container:hover {
-            transform: translateY(-6px) scale(1.01) translateZ(0);
-            box-shadow: 
-                0 40px 80px -15px rgba(0, 0, 0, 0.8),
-                0 0 50px -5px rgba(16, 185, 129, 0.35);
-        }
-
         @keyframes cardFloat {
-            0% { transform: translateY(0px) translateZ(0); }
-            100% { transform: translateY(-10px) translateZ(0); }
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-10px); }
         }
 
+        /* BANWAVE CARD */
         .status-card {
-            background: rgba(6, 78, 59, 0.25);
-            border: 1px solid rgba(52, 211, 153, 0.3);
-            border-radius: 20px;
-            padding: 18px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 24px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: inset 0 0 15px rgba(16, 185, 129, 0.1);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glow);
+            border-radius: 20px; padding: 18px 20px;
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 20px;
         }
 
-        .status-left {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .live-dot-wrapper {
-            position: relative;
-            width: 16px;
-            height: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .live-dot {
-            width: 12px;
-            height: 12px;
-            background: var(--green-light);
-            border-radius: 50%;
-            box-shadow: 0 0 12px var(--green-light);
-            z-index: 2;
-        }
-
+        .status-left { display: flex; align-items: center; gap: 14px; }
+        .live-dot-wrapper { position: relative; width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; }
+        .live-dot { width: 12px; height: 12px; background: var(--primary-light); border-radius: 50%; box-shadow: 0 0 12px var(--primary-light); z-index: 2; }
         .pulse-ring {
-            position: absolute;
-            width: 28px;
-            height: 28px;
-            background: rgba(52, 211, 153, 0.4);
-            border-radius: 50%;
+            position: absolute; width: 28px; height: 28px;
+            background: var(--border-glow); border-radius: 50%;
             animation: ripple 2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
-            z-index: 1;
         }
 
         @keyframes ripple {
@@ -133,105 +136,80 @@
             100% { transform: scale(1.8); opacity: 0; }
         }
 
-        .status-text-title {
-            font-size: 0.72rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--text-sub);
-            font-weight: 700;
-        }
-
-        .status-text-main {
-            font-size: 1.05rem;
-            font-weight: 800;
-            color: var(--green-light);
-            letter-spacing: 0.5px;
-            text-shadow: 0 0 12px rgba(52, 211, 153, 0.5);
-        }
-
-        .status-icon-shield {
-            font-size: 1.5rem;
-            color: var(--green-light);
-            filter: drop-shadow(0 0 8px rgba(52, 211, 153, 0.6));
-            animation: shieldPulse 3s ease-in-out infinite;
-        }
+        .status-text-title { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-sub); font-weight: 700; }
+        .status-text-main { font-size: 1.05rem; font-weight: 800; color: var(--primary-light); letter-spacing: 0.5px; text-shadow: 0 0 12px var(--border-glow); }
+        .status-icon-shield { font-size: 1.5rem; color: var(--primary-light); filter: drop-shadow(0 0 8px var(--primary-light)); animation: shieldPulse 3s ease-in-out infinite; }
 
         @keyframes shieldPulse {
             0%, 100% { transform: scale(1); opacity: 0.9; }
             50% { transform: scale(1.1); opacity: 1; }
         }
 
+        /* CLOCK SECTION */
         .clock-section {
-            background: rgba(15, 23, 42, 0.7);
+            background: rgba(0, 0, 0, 0.25);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
-            padding: 22px;
-            text-align: center;
-            position: relative;
-            margin-bottom: 20px;
+            border-radius: 24px; padding: 22px; text-align: center; margin-bottom: 20px;
         }
 
-        .clock-header {
-            font-size: 0.75rem;
-            color: var(--text-sub);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .clock-header i { color: #38bdf8; }
-
+        .clock-header { font-size: 0.75rem; color: var(--text-sub); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .digital-clock {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 2.3rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #38bdf8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-family: 'JetBrains Mono', monospace; font-size: 2.3rem; font-weight: 700;
+            background: linear-gradient(135deg, #ffffff 0%, var(--primary-light) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             letter-spacing: 1px;
-            text-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
-            will-change: content;
         }
+        .date-display { font-size: 0.85rem; color: var(--text-sub); margin-top: 6px; font-weight: 500; }
 
-        .date-display {
-            font-size: 0.85rem;
-            color: var(--text-sub);
-            margin-top: 6px;
-            font-weight: 500;
-        }
-
+        /* API ANNOUNCEMENT */
         .api-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px dashed rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
-            padding: 16px;
-            text-align: center;
-            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px dashed var(--border-glow);
+            border-radius: 20px; padding: 16px; text-align: center; margin-bottom: 20px;
         }
+        .api-title { font-size: 0.78rem; color: var(--text-sub); font-weight: 600; margin-bottom: 6px; }
+        .api-status-val { font-size: 0.88rem; font-weight: 600; color: #ffffff; line-height: 1.4; }
 
-        .api-card:hover {
-            border-color: var(--green-light);
-            background: rgba(16, 185, 129, 0.05);
+        /* THEME SWITCHER BAR */
+        .theme-bar {
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px; padding: 10px 16px; cursor: pointer;
         }
+        .theme-bar:hover { border-color: var(--primary-light); }
+        .theme-bar-title { font-size: 0.8rem; font-weight: 700; display: flex; align-items: center; gap: 8px; color: var(--text-sub); }
+        .theme-bar-title i { color: var(--primary-light); }
+        .theme-current-name { font-size: 0.8rem; font-weight: 800; color: var(--primary-light); text-transform: uppercase; }
 
-        .api-title {
-            font-size: 0.78rem;
-            color: var(--text-sub);
-            font-weight: 600;
-            margin-bottom: 6px;
+        /* THEME MODAL / GRID SELECTOR */
+        .theme-modal {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(15px);
+            z-index: 100; display: flex; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        .theme-modal.active { opacity: 1; pointer-events: auto; }
 
-        .api-status-val {
-            font-size: 0.88rem;
-            font-weight: 600;
-            color: #ffffff;
-            line-height: 1.4;
+        .theme-grid-card {
+            background: #0f172a; border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 28px; width: 90%; max-width: 440px; padding: 24px;
+            transform: scale(0.9); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        .theme-modal.active .theme-grid-card { transform: scale(1); }
+
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .modal-title { font-size: 1.1rem; font-weight: 800; display: flex; align-items: center; gap: 10px; }
+        .close-btn { background: rgba(255,255,255,0.1); border: none; color: #fff; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; }
+
+        .theme-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+        .theme-item {
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px; padding: 12px; text-align: center; cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .theme-item:hover { transform: translateY(-3px); border-color: #fff; background: rgba(255, 255, 255, 0.1); }
+        .theme-dot { width: 22px; height: 22px; border-radius: 50%; margin: 0 auto 8px auto; box-shadow: 0 0 10px currentColor; }
+        .theme-label { font-size: 0.72rem; font-weight: 700; color: var(--text-sub); }
     </style>
 </head>
 <body>
@@ -270,50 +248,124 @@
             <div class="api-status-val" id="apiResponse">Đang đồng bộ dữ liệu...</div>
         </div>
 
+        <!-- THEME SELECTOR BAR -->
+        <div class="theme-bar" id="openThemeModal">
+            <div class="theme-bar-title">
+                <i class="fa-solid fa-palette"></i> Giao diện (12 Themes)
+            </div>
+            <div class="theme-current-name" id="currentThemeLabel">Emerald</div>
+        </div>
+
+    </div>
+
+    <!-- MODAL CHỌN THEME -->
+    <div class="theme-modal" id="themeModal">
+        <div class="theme-grid-card">
+            <div class="modal-header">
+                <div class="modal-title"><i class="fa-solid fa-wand-magic-sparkles"></i> Chọn Giao Diện</div>
+                <button class="close-btn" id="closeThemeModal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="theme-grid">
+                <div class="theme-item" onclick="setTheme('emerald', 'Emerald')">
+                    <div class="theme-dot" style="background: #34d399; color: #34d399;"></div>
+                    <div class="theme-label">Emerald</div>
+                </div>
+                <div class="theme-item" onclick="setTheme('cyberpunk', 'Cyberpunk')">
+                    <div class="theme-dot" style="background: #00f0ff; color: #00f0ff;"></div>
+                    <div class="theme-label">Cyberpunk</div>
+                </div>
+                <div class="theme-item" onclick="setTheme('amethyst', 'Amethyst')">
+                    <div class="theme-dot" style="background: #c084fc; color: #c084fc;"></div>
+                    <div class="theme-label">Amethyst</div>
+                </div>
+                <div class="theme-item" onclick="setTheme('sunset', 'Sunset')">
+                    <div class="theme-dot" style="background: #fb923c; color: #fb923c;"></div>
+                    <div class="theme-label">Sunset</div>
+                </div>
+                <div class="theme-item" onclick="setTheme('ocean', 'Ocean')">
+                    <div class="theme-dot" style="background: #38bdf8; color: #38bdf8;"></div>
+                    <div class="theme-label">Ocean</div>
+                </div>
+                <div class="theme-item" onclick="setTheme('crimson', 'Crimson')">
+                    <div class="theme-dot" style="background: #fb7185; color: #fb7185;"></div>
+                    <div class="theme-label">Crimson</div>
+                </div>
+                <div class="theme-item" onclick="setTheme('gold', 'Gold')">
+                    <div class="theme-dot" style="background: #fde047; color: #fde047;"></div>
+                    <div class="theme-label">Gold</div>
+                </div>
+                <div class="theme-item" onclick="setTheme('vaporwave', 'Vaporwave')">
+                    <div class="theme-dot" style="background: #f472b6; color: #f472b6;"></div>
+                    <div class="theme-label">Vaporwave</div>
+                </div>
+                <div class="theme-item" onclick="setTheme('matrix', 'Matrix')">
+                    <div class="theme-dot" style="background: #4ade80; color: #4ade80;"></div>
+                    <div class="theme-label">Matrix</div>
+                </div>
+                <div class="theme-item" onclick="setTheme('aurora', 'Aurora')">
+                    <div class="theme-dot" style="background: #2dd4bf; color: #2dd4bf;"></div>
+                    <div class="theme-label">Aurora</div>
+                </div>
+                <div class="theme-item" onclick="setTheme('sakura', 'Sakura')">
+                    <div class="theme-dot" style="background: #fda4af; color: #fda4af;"></div>
+                    <div class="theme-label">Sakura</div>
+                </div>
+                <div class="theme-item" onclick="setTheme('obsidian', 'Obsidian')">
+                    <div class="theme-dot" style="background: #ffffff; color: #ffffff;"></div>
+                    <div class="theme-label">Obsidian</div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        // API Endpoint Npoint của bạn
+        // API NPOINT
         const NPOINT_API_URL = 'https://api.npoint.io/db97bcdc9bb0181fe3ee';
 
-        // 1. TỰ ĐỘNG LẤY DỮ LIỆU TỪ NPOINT
         async function checkBanwaveAPI() {
             try {
                 const response = await fetch(NPOINT_API_URL);
                 const data = await response.json();
-
-                if (data.banwave_status) {
-                    document.getElementById('banwaveStatusText').textContent = "BANWAVE STATUS: " + data.banwave_status;
-                }
-                if (data.announcement) {
-                    document.getElementById('apiResponse').textContent = data.announcement;
-                }
+                if (data.banwave_status) document.getElementById('banwaveStatusText').textContent = "BANWAVE STATUS: " + data.banwave_status;
+                if (data.announcement) document.getElementById('apiResponse').textContent = data.announcement;
             } catch (error) {
                 document.getElementById('apiResponse').textContent = "Lỗi kết nối tới Npoint!";
             }
         }
-
-        // Lấy dữ liệu ngay lập tức và lập lại mỗi 5s
         checkBanwaveAPI();
         setInterval(checkBanwaveAPI, 5000);
 
-        // 2. ĐỒNG HỒ VIỆT NAM REALTIME 60FPS
+        // ĐỒNG HỒ VIỆT NAM REALTIME
         function updateVietnamTime() {
             const now = new Date();
             const optionsDate = { timeZone: 'Asia/Ho_Chi_Minh', weekday: 'long', year: 'numeric', month: '2-digit', day: '2-digit' };
             const optionsTime = { timeZone: 'Asia/Ho_Chi_Minh', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
 
-            const dateStr = now.toLocaleDateString('vi-VN', optionsDate);
-            const timeStr = now.toLocaleTimeString('en-GB', optionsTime);
-
-            document.getElementById('vietnamClock').textContent = timeStr;
-            document.getElementById('vietnamDate').textContent = dateStr;
-            
+            document.getElementById('vietnamClock').textContent = now.toLocaleTimeString('en-GB', optionsTime);
+            document.getElementById('vietnamDate').textContent = now.toLocaleDateString('vi-VN', optionsDate);
             requestAnimationFrame(updateVietnamTime);
         }
         requestAnimationFrame(updateVietnamTime);
 
-        // 3. CANVAS HẠT NỀN GPU ACCELERATED
+        // BỘ ĐỔI THEME
+        const themeModal = document.getElementById('themeModal');
+        document.getElementById('openThemeModal').onclick = () => themeModal.classList.add('active');
+        document.getElementById('closeThemeModal').onclick = () => themeModal.classList.remove('active');
+
+        function setTheme(themeKey, themeName) {
+            document.documentElement.setAttribute('data-theme', themeKey);
+            document.getElementById('currentThemeLabel').textContent = themeName;
+            localStorage.setItem('selectedThemeKey', themeKey);
+            localStorage.setItem('selectedThemeName', themeName);
+            themeModal.classList.remove('active');
+        }
+
+        // Tải lại theme đã lưu
+        const savedKey = localStorage.getItem('selectedThemeKey') || 'emerald';
+        const savedName = localStorage.getItem('selectedThemeName') || 'Emerald';
+        setTheme(savedKey, savedName);
+
+        // HẠT NỀN GPU ANIMATION
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
         let width, height, particles = [];
@@ -326,9 +378,7 @@
         resize();
 
         class Particle {
-            constructor() {
-                this.reset();
-            }
+            constructor() { this.reset(); }
             reset() {
                 this.x = Math.random() * width;
                 this.y = Math.random() * height;
@@ -342,22 +392,20 @@
                 this.x += this.speedX;
                 if (this.y < 0 || this.x < 0 || this.x > width) this.reset();
             }
-            draw() {
-                ctx.fillStyle = `rgba(52, 211, 153, ${this.opacity})`;
+            draw(rgbColor) {
+                ctx.fillStyle = `rgba(${rgbColor}, ${this.opacity})`;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
             }
         }
 
-        for (let i = 0; i < 40; i++) particles.push(new Particle());
+        for (let i = 0; i < 45; i++) particles.push(new Particle());
 
         function animateParticles() {
             ctx.clearRect(0, 0, width, height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
+            const rgb = getComputedStyle(document.documentElement).getPropertyValue('--particle-rgb').trim() || '52, 211, 153';
+            particles.forEach(p => { p.update(); p.draw(rgb); });
             requestAnimationFrame(animateParticles);
         }
         animateParticles();
